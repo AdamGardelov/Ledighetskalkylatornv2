@@ -32,8 +32,14 @@ export function calculateLeaveDays(
     return null;
   }
 
-  const year = fromDate.getFullYear();
-  const holidays = getSwedishHolidays(year);
+  // Collect holidays for all years covered by the range (important for spans over New Year)
+  const startYear = fromDate.getFullYear();
+  const endYear = toDate.getFullYear();
+  let holidays: Holiday[] = [];
+
+  for (let year = startYear; year <= endYear; year++) {
+    holidays = holidays.concat(getSwedishHolidays(year));
+  }
   
   // Get holidays in the date range
   const holidaysInRange = holidays.filter((holiday) => {

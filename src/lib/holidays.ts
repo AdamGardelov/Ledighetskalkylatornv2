@@ -8,7 +8,7 @@ export interface Holiday {
 
 export const getSwedishHolidays = (year: number): Holiday[] => {
   const holidays: Holiday[] = [
-    // Fixed holidays
+    // Fixed holidays (including eves that are commonly treated as "röda dagar")
     { date: `${year}-01-01`, name: "Nyårsdagen" },
     { date: `${year}-01-06`, name: "Trettondedag jul" },
     { date: `${year}-05-01`, name: "Första maj" },
@@ -31,6 +31,12 @@ export const getSwedishHolidays = (year: number): Holiday[] => {
     name: "Långfredagen",
   });
 
+  // Påskdagen (Easter Sunday) – official holiday (also a Sunday)
+  holidays.push({
+    date: formatDate(easterDate),
+    name: "Påskdagen",
+  });
+
   const easterMonday = new Date(easterDate);
   easterMonday.setDate(easterDate.getDate() + 1);
   holidays.push({
@@ -45,22 +51,32 @@ export const getSwedishHolidays = (year: number): Holiday[] => {
     name: "Kristi himmelsfärdsdag",
   });
 
-  const whitMonday = new Date(easterDate);
-  whitMonday.setDate(easterDate.getDate() + 50);
+  // Pingstafton (Saturday) and Pingstdagen (Sunday) – around Pentecost
+  const pentecostSunday = new Date(easterDate);
+  pentecostSunday.setDate(easterDate.getDate() + 49);
+  const pentecostEve = new Date(pentecostSunday);
+  pentecostEve.setDate(pentecostSunday.getDate() - 1);
+
   holidays.push({
-    date: formatDate(whitMonday),
-    name: "Annandag pingst",
+    date: formatDate(pentecostEve),
+    name: "Pingstafton",
   });
 
-  // Midsummer (always on a Saturday between June 20-26)
-  const midsummer = getMidsummerDay(year);
   holidays.push({
-    date: formatDate(midsummer),
+    date: formatDate(pentecostSunday),
+    name: "Pingstdagen",
+  });
+
+  // Midsummer (Midsommarafton + Midsommardagen)
+  const midsummerDay = getMidsummerDay(year); // Saturday
+  const midsummerEve = new Date(midsummerDay);
+  midsummerEve.setDate(midsummerDay.getDate() - 1);
+
+  holidays.push({
+    date: formatDate(midsummerEve),
     name: "Midsommarafton",
   });
 
-  const midsummerDay = new Date(midsummer);
-  midsummerDay.setDate(midsummer.getDate() + 1);
   holidays.push({
     date: formatDate(midsummerDay),
     name: "Midsommardagen",
