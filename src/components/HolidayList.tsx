@@ -47,12 +47,16 @@ export default function HolidayList({ holidays, currentYear }: HolidayListProps)
             return (
               <div
                 key={holiday.date}
-                className={`${itemBgClass} ${itemHoverClass} rounded-lg p-2 sm:p-2 border ${borderClass} transition-colors`}
+                className="rounded-lg p-3 border transition-colors bg-red-500/20 border-red-500/30 hover:bg-red-500/30"
               >
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between w-full gap-1 sm:gap-0">
-                  <span className={`font-medium ${textClass} text-sm sm:text-base break-words`}>
-                    <span className="text-xs sm:text-sm font-normal">{format(holidayDate, "yyyy-MM-dd", { locale: sv })}</span> - {holiday.name}
-                  </span>
+                <div className="text-sm font-medium text-white capitalize">
+                  {format(holidayDate, "EEEE", { locale: sv })}
+                </div>
+                <div className="text-xs text-gray-300/80 mt-1">
+                  {format(holidayDate, "d MMM yyyy", { locale: sv })}
+                </div>
+                <div className="text-xs text-red-300 mt-1 font-semibold">
+                  🎉 {holiday.name}
                 </div>
               </div>
             );

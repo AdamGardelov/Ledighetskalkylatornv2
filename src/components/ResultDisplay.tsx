@@ -171,7 +171,7 @@ export default function ResultDisplay({ result, seasonTheme }: ResultDisplayProp
                     key={day.dateString}
                     className={`${getPrimaryBgClass()} rounded-lg p-3 transition-colors`}
                   >
-                    <div className={`text-sm font-medium ${getPrimaryTextClass()}`}>
+                    <div className={`text-sm font-medium ${getPrimaryTextClass()} capitalize`}>
                       {format(day.date, "EEEE", { locale: sv })}
                     </div>
                     <div className={`text-xs ${getPrimaryTextSecondaryClass()} mt-1`}>
@@ -220,7 +220,7 @@ export default function ResultDisplay({ result, seasonTheme }: ResultDisplayProp
                         : "bg-blue-500/20 border-blue-500/30 hover:bg-blue-500/30"
                     }`}
                   >
-                    <div className="text-sm font-medium text-white">
+                    <div className="text-sm font-medium text-white capitalize">
                       {format(day.date, "EEEE", { locale: sv })}
                     </div>
                     <div className="text-xs text-gray-300/80 mt-1">
