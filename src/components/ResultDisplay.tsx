@@ -101,16 +101,16 @@ export default function ResultDisplay({ result, seasonTheme }: ResultDisplayProp
   };
 
   return (
-    <div className="mb-6 sm:mb-8 space-y-3 sm:space-y-4">
+    <div className="mb-4 sm:mb-8 space-y-2.5 sm:space-y-4">
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-4">
         {/* Dagar att ta ledigt */}
-        <div className={`${cardBgClass} rounded-lg p-4 sm:p-6 border ${cardBorderClass} shadow-lg`}>
-          <div className="flex items-center justify-between mb-2">
-            <h3 className={`text-base sm:text-lg font-semibold ${textClass}`}>Dagar att ta ledigt</h3>
-            <span className={`text-xl sm:text-2xl font-bold ${getPrimaryColorClass()}`}>{workingDaysToTakeOff.length}</span>
+        <div className={`${cardBgClass} rounded-lg p-3 sm:p-6 border ${cardBorderClass} shadow-lg`}>
+          <div className="flex items-center justify-between mb-1.5 sm:mb-2">
+            <h3 className={`text-sm sm:text-lg font-semibold ${textClass}`}>Dagar att ta ledigt</h3>
+            <span className={`text-lg sm:text-2xl font-bold ${getPrimaryColorClass()}`}>{workingDaysToTakeOff.length}</span>
           </div>
-          <p className={`text-xs sm:text-sm ${textSecondaryClass} mb-3 sm:mb-4`}>
+          <p className={`text-xs sm:text-sm ${textSecondaryClass} mb-2 sm:mb-4`}>
             Arbetsdagar du behöver ta ledigt
           </p>
           <button
@@ -123,12 +123,12 @@ export default function ResultDisplay({ result, seasonTheme }: ResultDisplayProp
         </div>
 
         {/* Lediga dagar */}
-        <div className={`${cardBgClass} rounded-lg p-4 sm:p-6 border ${cardBorderClass} shadow-lg`}>
-          <div className="flex items-center justify-between mb-2">
-            <h3 className={`text-base sm:text-lg font-semibold ${textClass}`}>Lediga dagar</h3>
-            <span className={`text-xl sm:text-2xl font-bold text-blue-400`}>{daysOff.length}</span>
+        <div className={`${cardBgClass} rounded-lg p-3 sm:p-6 border ${cardBorderClass} shadow-lg`}>
+          <div className="flex items-center justify-between mb-1.5 sm:mb-2">
+            <h3 className={`text-sm sm:text-lg font-semibold ${textClass}`}>Lediga dagar</h3>
+            <span className={`text-lg sm:text-2xl font-bold text-blue-400`}>{daysOff.length}</span>
           </div>
-          <p className={`text-xs sm:text-sm ${textSecondaryClass} mb-3 sm:mb-4`}>
+          <p className={`text-xs sm:text-sm ${textSecondaryClass} mb-2 sm:mb-4`}>
             Helger och röda dagar (redan lediga)
           </p>
           <button
@@ -143,8 +143,8 @@ export default function ResultDisplay({ result, seasonTheme }: ResultDisplayProp
 
       {/* Expanded: Dagar att ta ledigt */}
       {isDaysToTakeOffExpanded && (
-        <div className={`${cardBgClass} rounded-lg p-4 sm:p-6 border ${cardBorderClass} shadow-lg`}>
-          <h4 className={`text-sm sm:text-md font-semibold ${textClass} mb-3 sm:mb-4`}>
+        <div className={`${cardBgClass} rounded-lg p-3 sm:p-6 border ${cardBorderClass} shadow-lg`}>
+          <h4 className={`text-sm sm:text-md font-semibold ${textClass} mb-2.5 sm:mb-4`}>
             Dagar att ta ledigt ({workingDaysToTakeOff.length})
           </h4>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
@@ -167,8 +167,8 @@ export default function ResultDisplay({ result, seasonTheme }: ResultDisplayProp
 
       {/* Expanded: Lediga dagar */}
       {isDaysOffExpanded && (
-        <div className={`${cardBgClass} rounded-lg p-4 sm:p-6 border ${cardBorderClass} shadow-lg`}>
-          <h4 className={`text-sm sm:text-md font-semibold ${textClass} mb-3 sm:mb-4`}>
+        <div className={`${cardBgClass} rounded-lg p-3 sm:p-6 border ${cardBorderClass} shadow-lg`}>
+          <h4 className={`text-sm sm:text-md font-semibold ${textClass} mb-2.5 sm:mb-4`}>
             Lediga dagar ({daysOff.length})
           </h4>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">

@@ -37,20 +37,36 @@ export function addToSearchHistory(fromDate: string, toDate: string): void {
 
   const history = getSearchHistory();
   
-  // Remove duplicates (same from/to dates)
-  const filtered = history.filter(
-    (item) => !(item.fromDate === fromDate && item.toDate === toDate)
+  // Check if exact same date range already exists
+  const existingIndex = history.findIndex(
+    (item) => item.fromDate === fromDate && item.toDate === toDate
   );
 
-  // Add new search at the beginning
-  const newHistory: SearchHistoryItem[] = [
-    {
-      fromDate,
-      toDate,
+  let newHistory: SearchHistoryItem[];
+
+  if (existingIndex !== -1) {
+    // Update existing entry's timestamp and move to top
+    const existingItem = history[existingIndex];
+    const updatedItem = {
+      ...existingItem,
       timestamp: Date.now(),
-    },
-    ...filtered,
-  ].slice(0, MAX_HISTORY_ITEMS);
+    };
+    // Remove the old entry and add updated one at the beginning
+    newHistory = [
+      updatedItem,
+      ...history.filter((_, index) => index !== existingIndex),
+    ];
+  } else {
+    // Add new search at the beginning
+    newHistory = [
+      {
+        fromDate,
+        toDate,
+        timestamp: Date.now(),
+      },
+      ...history,
+    ].slice(0, MAX_HISTORY_ITEMS);
+  }
 
   setCookie(HISTORY_COOKIE_NAME, JSON.stringify(newHistory), 365);
 }

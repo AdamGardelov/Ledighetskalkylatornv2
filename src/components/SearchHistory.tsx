@@ -39,16 +39,16 @@ export default function SearchHistory({ onSelectSearch, refreshTrigger }: Search
   const itemHoverClass = theme === "dark" ? "hover:bg-[#3C3D37]" : "hover:bg-gray-50";
 
   return (
-    <div className={`mt-4 sm:mt-6 ${bgClass} rounded-lg p-3 sm:p-4 border ${borderClass}`}>
+    <div className={`mt-3 sm:mt-6 ${bgClass} rounded-lg p-2.5 sm:p-4 border ${borderClass}`}>
       <div className="flex items-center justify-between mb-2 gap-2">
         <button
           onClick={() => setIsExpanded(!isExpanded)}
           className="flex-1 flex items-center justify-between text-left min-w-0"
         >
-          <h2 className={`text-base sm:text-lg font-semibold ${textClass} truncate`}>
+          <h2 className={`text-sm sm:text-lg font-semibold ${textClass} truncate`}>
             Senaste sökningar ({history.length})
           </h2>
-          <span className={`${textClass} text-lg sm:text-xl flex-shrink-0 ml-2`}>
+          <span className={`${textClass} text-base sm:text-xl flex-shrink-0 ml-2`}>
             {isExpanded ? "−" : "+"}
           </span>
         </button>
@@ -63,7 +63,7 @@ export default function SearchHistory({ onSelectSearch, refreshTrigger }: Search
       </div>
 
       {isExpanded && (
-        <div className="mt-4 space-y-2">
+        <div className="mt-3 sm:mt-4 space-y-1.5 sm:space-y-2">
           {history.map((item) => {
             const fromDate = new Date(item.fromDate);
             const toDate = new Date(item.toDate);
@@ -73,7 +73,7 @@ export default function SearchHistory({ onSelectSearch, refreshTrigger }: Search
               <button
                 key={`${item.fromDate}-${item.toDate}-${item.timestamp}`}
                 onClick={() => handleSelect(item)}
-                className={`w-full ${itemBgClass} ${itemHoverClass} rounded-lg p-3 border ${borderClass} transition-colors text-left`}
+                className={`w-full ${itemBgClass} ${itemHoverClass} rounded-lg p-2.5 sm:p-3 border ${borderClass} transition-colors text-left`}
               >
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
                   <div className="flex-1 min-w-0">

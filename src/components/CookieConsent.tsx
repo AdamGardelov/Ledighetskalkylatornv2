@@ -32,7 +32,7 @@ export default function CookieConsent() {
   const buttonSecondaryClass = theme === "dark" ? "bg-[#1E201E] hover:bg-[#3C3D37]" : "bg-gray-200 hover:bg-gray-300";
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-[100] p-3 sm:p-4">
+    <div className="fixed bottom-0 left-0 right-0 z-[100] p-3 sm:p-4">
       <div className={`max-w-4xl mx-auto ${bgClass} ${textClass} rounded-lg border ${borderClass} shadow-lg p-4 sm:p-6`}>
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
           <div className="flex-1 min-w-0">
