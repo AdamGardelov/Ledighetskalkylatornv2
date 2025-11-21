@@ -108,11 +108,11 @@ function App() {
       <ThemeToggle />
       <CookieConsent />
       
-      <div className="w-full max-w-4xl mx-auto flex-1 flex flex-col">
+      <div className="w-full max-w-4xl mx-auto flex-1 flex flex-col pt-12 sm:pt-4">
         <div className="flex-1 flex flex-col justify-center">
           {/* Header text */}
           <div className="text-center mb-6 sm:mb-8">
-            <p className={`text-base sm:text-lg ${textSecondaryClass} mb-2 px-2`}>
+            <p className={`text-base sm:text-lg ${textSecondaryClass} mb-2 px-2 sm:px-0 pr-12 sm:pr-0`}>
               Fyll i från och tilldatum för att ta reda på antal dagar du behöver ta ledigt <span className="text-xl sm:text-2xl">{seasonTheme.emoji}</span>
             </p>
           </div>
@@ -128,7 +128,7 @@ function App() {
               type="date"
               value={fromDate}
               onChange={(e) => setFromDate(e.target.value)}
-              className={`w-full px-4 py-2 ${inputBgClass} border ${inputBorderClass} rounded-lg ${inputTextClass} focus:outline-none focus:ring-2 ${focusRingClass} focus:border-transparent`}
+              className={`w-full px-4 py-3 sm:py-2.5 text-base ${inputBgClass} border ${inputBorderClass} rounded-lg ${inputTextClass} focus:outline-none focus:ring-2 ${focusRingClass} focus:border-transparent min-h-[44px]`}
             />
           </div>
           <div className="flex-1">
@@ -140,13 +140,13 @@ function App() {
               type="date"
               value={toDate}
               onChange={(e) => setToDate(e.target.value)}
-              className={`w-full px-4 py-2 ${inputBgClass} border ${inputBorderClass} rounded-lg ${inputTextClass} focus:outline-none focus:ring-2 ${focusRingClass} focus:border-transparent`}
+              className={`w-full px-4 py-3 sm:py-2.5 text-base ${inputBgClass} border ${inputBorderClass} rounded-lg ${inputTextClass} focus:outline-none focus:ring-2 ${focusRingClass} focus:border-transparent min-h-[44px]`}
             />
           </div>
           <div className="flex items-end">
             <button
               onClick={handleCalculate}
-              className={`w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-2 ${seasonTheme.primaryColor} ${seasonTheme.primaryColorHover} text-white font-semibold rounded-lg transition-colors duration-200 text-base`}
+              className={`w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-2.5 ${seasonTheme.primaryColor} ${seasonTheme.primaryColorHover} text-white font-semibold rounded-lg transition-colors duration-200 text-base min-h-[44px]`}
             >
               Beräkna
             </button>
