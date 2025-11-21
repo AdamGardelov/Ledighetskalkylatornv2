@@ -112,8 +112,8 @@ function App() {
           </div>
 
         {/* Date inputs and calculate button */}
-        <div className="flex flex-col sm:flex-row sm:items-end gap-2.5 sm:gap-4 mb-4 sm:mb-6">
-          <div className="flex flex-row gap-2 sm:gap-4 flex-1">
+        <div className="flex flex-col sm:flex-row sm:items-end gap-3 sm:gap-4 mb-4 sm:mb-6">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 flex-1">
             <div className="flex-1">
               <label htmlFor="fromDate" className={`block text-xs font-medium mb-1 ${textSecondaryClass}`}>
                 Från
@@ -123,7 +123,7 @@ function App() {
                 type="date"
                 value={fromDate}
                 onChange={(e) => setFromDate(e.target.value)}
-                className={`w-full px-2 sm:px-4 py-1.5 sm:py-2.5 text-xs sm:text-base ${inputBgClass} border ${inputBorderClass} rounded-lg ${inputTextClass} focus:outline-none focus:ring-2 ${focusRingClass} focus:border-transparent min-h-[36px] sm:min-h-[44px]`}
+                className={`w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base ${inputBgClass} border ${inputBorderClass} rounded-lg ${inputTextClass} focus:outline-none focus:ring-2 ${focusRingClass} focus:border-transparent min-h-[40px] sm:min-h-[44px]`}
               />
             </div>
             <div className="flex-1">
@@ -135,13 +135,13 @@ function App() {
                 type="date"
                 value={toDate}
                 onChange={(e) => setToDate(e.target.value)}
-                className={`w-full px-2 sm:px-4 py-1.5 sm:py-2.5 text-xs sm:text-base ${inputBgClass} border ${inputBorderClass} rounded-lg ${inputTextClass} focus:outline-none focus:ring-2 ${focusRingClass} focus:border-transparent min-h-[36px] sm:min-h-[44px]`}
+                className={`w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base ${inputBgClass} border ${inputBorderClass} rounded-lg ${inputTextClass} focus:outline-none focus:ring-2 ${focusRingClass} focus:border-transparent min-h-[40px] sm:min-h-[44px]`}
               />
             </div>
           </div>
           <button
             onClick={handleCalculate}
-            className={`w-full sm:w-auto px-5 sm:px-8 py-2.5 sm:py-2.5 ${seasonTheme.primaryColor} ${seasonTheme.primaryColorHover} text-white font-semibold rounded-lg transition-colors duration-200 text-sm sm:text-base min-h-[40px] sm:min-h-[44px]`}
+            className={`w-full sm:w-auto px-5 sm:px-8 py-2 sm:py-2.5 ${seasonTheme.primaryColor} ${seasonTheme.primaryColorHover} text-white font-semibold rounded-lg transition-colors duration-200 text-sm sm:text-base min-h-[40px] sm:min-h-[44px]`}
           >
             Beräkna
           </button>
