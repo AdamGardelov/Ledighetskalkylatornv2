@@ -45,9 +45,14 @@ export default function SearchHistory({ onSelectSearch, refreshTrigger }: Search
           onClick={() => setIsExpanded(!isExpanded)}
           className="flex-1 flex items-center justify-between text-left min-w-0"
         >
-          <h2 className={`text-sm sm:text-lg font-semibold ${textClass} truncate`}>
-            Senaste sökningar ({history.length})
-          </h2>
+          <div className="flex flex-col min-w-0">
+            <h2 className={`text-sm sm:text-lg font-semibold ${textClass} truncate`}>
+              Senaste sökningar ({history.length})
+            </h2>
+            <span className={`text-xs sm:text-sm ${theme === "dark" ? "text-[#ECDFCC]/70" : "text-gray-600"}`}>
+              {isExpanded ? "Dölj" : "Visa"} sökningar
+            </span>
+          </div>
           <span className={`${textClass} text-base sm:text-xl flex-shrink-0 ml-2`}>
             {isExpanded ? "−" : "+"}
           </span>
