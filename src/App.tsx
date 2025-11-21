@@ -141,7 +141,7 @@ function App() {
           </div>
           <button
             onClick={handleCalculate}
-            className={`w-full sm:w-auto px-5 sm:px-8 py-2 sm:py-2.5 ${seasonTheme.primaryColor} ${seasonTheme.primaryColorHover} text-white font-semibold rounded-lg transition-colors duration-200 text-sm sm:text-base min-h-[40px] sm:min-h-[44px]`}
+            className={`w-full sm:w-auto px-5 sm:px-8 py-2 sm:py-2.5 ${seasonTheme.primaryColor} ${seasonTheme.primaryColorHover} text-white font-semibold rounded-lg transition-colors duration-200 text-sm sm:text-base min-h-[40px] sm:min-h-[44px] border border-transparent`}
           >
             Beräkna
           </button>

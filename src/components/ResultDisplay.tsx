@@ -116,128 +116,133 @@ export default function ResultDisplay({ result, seasonTheme }: ResultDisplayProp
   };
 
   return (
-    <div className="mb-4 sm:mb-8 space-y-2.5 sm:space-y-4">
-      {/* Summary Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-4">
-        {/* Dagar att ta ledigt */}
-        <div className={`${cardBgClass} rounded-lg p-3 sm:p-6 border ${cardBorderClass} shadow-lg`}>
-          <div className="flex items-center justify-between mb-1.5 sm:mb-2">
-            <h3 className={`text-sm sm:text-lg font-semibold ${textClass}`}>Dagar att ta ledigt</h3>
-            <span className={`text-lg sm:text-2xl font-bold ${getPrimaryColorClass()}`}>{workingDaysToTakeOff.length}</span>
-          </div>
-          <p className={`text-xs sm:text-sm ${textSecondaryClass} mb-2 sm:mb-4`}>
-            Arbetsdagar du behöver ta ledigt
-          </p>
-          <button
-            onClick={() => setIsDaysToTakeOffExpanded(!isDaysToTakeOffExpanded)}
-            className={`w-full flex items-center justify-between text-left text-sm ${getPrimaryColorClass()} ${getPrimaryHoverClass()} transition-colors`}
-          >
-            <span>{isDaysToTakeOffExpanded ? "Dölj" : "Visa"} alla dagar</span>
-            <span className="text-lg">{isDaysToTakeOffExpanded ? "−" : "+"}</span>
-          </button>
-        </div>
-
-        {/* Lediga dagar */}
-        <div className={`${cardBgClass} rounded-lg p-3 sm:p-6 border ${cardBorderClass} shadow-lg`}>
-          <div className="flex items-center justify-between mb-1.5 sm:mb-2">
-            <h3 className={`text-sm sm:text-lg font-semibold ${textClass}`}>Lediga dagar</h3>
-            <span className={`text-lg sm:text-2xl font-bold text-blue-400`}>{daysOff.length}</span>
-          </div>
-          <p className={`text-xs sm:text-sm ${textSecondaryClass} mb-2 sm:mb-4`}>
-            Helger och röda dagar (redan lediga)
-          </p>
-          <button
-            onClick={() => setIsDaysOffExpanded(!isDaysOffExpanded)}
-            className="w-full flex items-center justify-between text-left text-sm text-blue-400 hover:text-blue-300 transition-colors"
-          >
-            <span>{isDaysOffExpanded ? "Dölj" : "Visa"} alla dagar</span>
-            <span className="text-lg">{isDaysOffExpanded ? "−" : "+"}</span>
-          </button>
-        </div>
-      </div>
-
-      {/* Expanded: Dagar att ta ledigt */}
-      {isDaysToTakeOffExpanded && (
-        <div className={`${cardBgClass} rounded-lg p-3 sm:p-6 border ${cardBorderClass} shadow-lg`}>
-          <div className="flex items-center justify-between mb-2.5 sm:mb-4">
-            <h4 className={`text-sm sm:text-md font-semibold ${textClass}`}>
-              Dagar att ta ledigt ({workingDaysToTakeOff.length})
-            </h4>
+    <div className="mb-4 sm:mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-4 items-start">
+        {/* Dagar att ta ledigt Group */}
+        <div className="space-y-2.5 sm:space-y-4">
+          {/* Summary Card */}
+          <div className={`${cardBgClass} rounded-lg p-3 sm:p-6 border ${cardBorderClass} shadow-lg`}>
+            <div className="flex items-center justify-between mb-1.5 sm:mb-2">
+              <h3 className={`text-sm sm:text-lg font-semibold ${textClass}`}>Dagar att ta ledigt</h3>
+              <span className={`text-lg sm:text-2xl font-bold ${getPrimaryColorClass()}`}>{workingDaysToTakeOff.length}</span>
+            </div>
+            <p className={`text-xs sm:text-sm ${textSecondaryClass} mb-2 sm:mb-4`}>
+              Arbetsdagar du behöver ta ledigt
+            </p>
             <button
-              onClick={handleCopy}
-              className={`p-2 rounded-full transition-colors ${
-                showCopied 
-                  ? "bg-green-500/20 text-green-500" 
-                  : `${getPrimaryBgClass()} ${getPrimaryTextClass()} hover:bg-opacity-30`
-              }`}
-              title="Kopiera datum"
+              onClick={() => setIsDaysToTakeOffExpanded(!isDaysToTakeOffExpanded)}
+              className={`w-full flex items-center justify-between text-left text-sm ${getPrimaryColorClass()} ${getPrimaryHoverClass()} transition-colors`}
             >
-              {showCopied ? (
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              ) : (
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                </svg>
-              )}
+              <span>{isDaysToTakeOffExpanded ? "Dölj" : "Visa"} alla dagar</span>
+              <span className="text-lg">{isDaysToTakeOffExpanded ? "−" : "+"}</span>
             </button>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-            {workingDaysToTakeOff.map((day) => (
-              <div
-                key={day.dateString}
-                className={`${getPrimaryBgClass()} rounded-lg p-3 transition-colors`}
-              >
-                <div className={`text-sm font-medium ${getPrimaryTextClass()}`}>
-                  {format(day.date, "EEEE", { locale: sv })}
-                </div>
-                <div className={`text-xs ${getPrimaryTextSecondaryClass()} mt-1`}>
-                  {format(day.date, "d MMM yyyy", { locale: sv })}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
 
-      {/* Expanded: Lediga dagar */}
-      {isDaysOffExpanded && (
-        <div className={`${cardBgClass} rounded-lg p-3 sm:p-6 border ${cardBorderClass} shadow-lg`}>
-          <h4 className={`text-sm sm:text-md font-semibold ${textClass} mb-2.5 sm:mb-4`}>
-            Lediga dagar ({daysOff.length})
-          </h4>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-            {daysOff.map((day) => (
-              <div
-                key={day.dateString}
-                className={`rounded-lg p-3 border transition-colors ${
-                  day.isHoliday
-                    ? "bg-red-500/20 border-red-500/30 hover:bg-red-500/30"
-                    : "bg-blue-500/20 border-blue-500/30 hover:bg-blue-500/30"
-                }`}
-              >
-                <div className="text-sm font-medium text-white">
-                  {format(day.date, "EEEE", { locale: sv })}
-                </div>
-                <div className="text-xs text-gray-300/80 mt-1">
-                  {format(day.date, "d MMM yyyy", { locale: sv })}
-                </div>
-                {day.isHoliday && day.holidayName && (
-                  <div className="text-xs text-red-300 mt-1 font-semibold">
-                    🎉 {day.holidayName}
-                  </div>
-                )}
-                {day.isWeekend && !day.isHoliday && (
-                  <div className="text-xs text-blue-300 mt-1">
-                    Helg
-                  </div>
-                )}
+          {/* Expanded Content */}
+          {isDaysToTakeOffExpanded && (
+            <div className={`${cardBgClass} rounded-lg p-3 sm:p-6 border ${cardBorderClass} shadow-lg`}>
+              <div className="flex items-center justify-between mb-2.5 sm:mb-4">
+                <h4 className={`text-sm sm:text-md font-semibold ${textClass}`}>
+                  Dagar att ta ledigt ({workingDaysToTakeOff.length})
+                </h4>
+                <button
+                  onClick={handleCopy}
+                  className={`p-2 rounded-full transition-colors ${
+                    showCopied 
+                      ? "bg-green-500/20 text-green-500" 
+                      : `${getPrimaryBgClass()} ${getPrimaryTextClass()} hover:bg-opacity-30`
+                  }`}
+                  title="Kopiera datum"
+                >
+                  {showCopied ? (
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  ) : (
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                    </svg>
+                  )}
+                </button>
               </div>
-            ))}
-          </div>
+              <div className="grid grid-cols-1 gap-2">
+                {workingDaysToTakeOff.map((day) => (
+                  <div
+                    key={day.dateString}
+                    className={`${getPrimaryBgClass()} rounded-lg p-3 transition-colors`}
+                  >
+                    <div className={`text-sm font-medium ${getPrimaryTextClass()}`}>
+                      {format(day.date, "EEEE", { locale: sv })}
+                    </div>
+                    <div className={`text-xs ${getPrimaryTextSecondaryClass()} mt-1`}>
+                      {format(day.date, "d MMM yyyy", { locale: sv })}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
-      )}
+
+        {/* Lediga dagar Group */}
+        <div className="space-y-2.5 sm:space-y-4">
+          {/* Summary Card */}
+          <div className={`${cardBgClass} rounded-lg p-3 sm:p-6 border ${cardBorderClass} shadow-lg`}>
+            <div className="flex items-center justify-between mb-1.5 sm:mb-2">
+              <h3 className={`text-sm sm:text-lg font-semibold ${textClass}`}>Lediga dagar</h3>
+              <span className={`text-lg sm:text-2xl font-bold text-blue-400`}>{daysOff.length}</span>
+            </div>
+            <p className={`text-xs sm:text-sm ${textSecondaryClass} mb-2 sm:mb-4`}>
+              Helger och röda dagar (redan lediga)
+            </p>
+            <button
+              onClick={() => setIsDaysOffExpanded(!isDaysOffExpanded)}
+              className="w-full flex items-center justify-between text-left text-sm text-blue-400 hover:text-blue-300 transition-colors"
+            >
+              <span>{isDaysOffExpanded ? "Dölj" : "Visa"} alla dagar</span>
+              <span className="text-lg">{isDaysOffExpanded ? "−" : "+"}</span>
+            </button>
+          </div>
+
+          {/* Expanded Content */}
+          {isDaysOffExpanded && (
+            <div className={`${cardBgClass} rounded-lg p-3 sm:p-6 border ${cardBorderClass} shadow-lg`}>
+              <h4 className={`text-sm sm:text-md font-semibold ${textClass} mb-2.5 sm:mb-4`}>
+                Lediga dagar ({daysOff.length})
+              </h4>
+              <div className="grid grid-cols-1 gap-2">
+                {daysOff.map((day) => (
+                  <div
+                    key={day.dateString}
+                    className={`rounded-lg p-3 border transition-colors ${
+                      day.isHoliday
+                        ? "bg-red-500/20 border-red-500/30 hover:bg-red-500/30"
+                        : "bg-blue-500/20 border-blue-500/30 hover:bg-blue-500/30"
+                    }`}
+                  >
+                    <div className="text-sm font-medium text-white">
+                      {format(day.date, "EEEE", { locale: sv })}
+                    </div>
+                    <div className="text-xs text-gray-300/80 mt-1">
+                      {format(day.date, "d MMM yyyy", { locale: sv })}
+                    </div>
+                    {day.isHoliday && day.holidayName && (
+                      <div className="text-xs text-red-300 mt-1 font-semibold">
+                        🎉 {day.holidayName}
+                      </div>
+                    )}
+                    {day.isWeekend && !day.isHoliday && (
+                      <div className="text-xs text-blue-300 mt-1">
+                        Helg
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
