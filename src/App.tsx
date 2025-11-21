@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { calculateLeaveDays } from "@/lib/dateUtils";
 import HolidayList from "@/components/HolidayList";
 import ResultDisplay from "@/components/ResultDisplay";
@@ -20,10 +20,6 @@ function App() {
   const holidays = getSwedishHolidays(currentYear);
   const { theme } = useTheme();
   
-  // Track previous values to avoid recalculating on navigation
-  const prevFromDate = useRef<string>("");
-  const prevToDate = useRef<string>("");
-  
   // Get current season theme
   const seasonTheme = getSeasonTheme(getCurrentSeason());
 
@@ -39,31 +35,22 @@ function App() {
     }
   }, [fromDate, toDate]);
 
-  // Function to perform calculation
-  const performCalculation = () => {
+  // Handle calculation
+  const handleCalculate = () => {
     if (!fromDate || !toDate) {
-      setResult(null);
-      return;
-    }
-
-    // Validate that dates are in correct format (YYYY-MM-DD)
-    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
-    if (!dateRegex.test(fromDate) || !dateRegex.test(toDate)) {
-      setResult(null);
       return;
     }
 
     const from = new Date(fromDate);
     const to = new Date(toDate);
 
-    // Check if dates are valid
+    // Validate dates
     if (isNaN(from.getTime()) || isNaN(to.getTime())) {
-      setResult(null);
       return;
     }
 
     if (from > to) {
-      setResult(null);
+      alert("Från-datumet måste vara före eller samma som till-datumet");
       return;
     }
 
@@ -75,20 +62,16 @@ function App() {
     setSearchHistoryRefresh(Date.now());
   };
 
-  // Auto-calculate when both dates are set and valid, and actually changed
-  useEffect(() => {
-    // Only calculate if dates actually changed
-    if (fromDate === prevFromDate.current && toDate === prevToDate.current) {
-      return;
-    }
-
-    // Update refs
-    prevFromDate.current = fromDate;
-    prevToDate.current = toDate;
-
-    // Don't calculate immediately - wait for blur
-    // This prevents calculation during month navigation
-  }, [fromDate, toDate]);
+  const handleSelectSearch = (selectedFromDate: string, selectedToDate: string) => {
+    setFromDate(selectedFromDate);
+    setToDate(selectedToDate);
+    
+    // Automatically calculate when selecting from history
+    const from = new Date(selectedFromDate);
+    const to = new Date(selectedToDate);
+    const calculation = calculateLeaveDays(from, to);
+    setResult(calculation);
+  };
 
   // Get focus ring color based on season
   const getFocusRingClass = () => {
@@ -104,12 +87,6 @@ function App() {
       default:
         return "focus:ring-orange-500";
     }
-  };
-
-  const handleSelectSearch = (selectedFromDate: string, selectedToDate: string) => {
-    setFromDate(selectedFromDate);
-    setToDate(selectedToDate);
-    // Calculation will happen automatically via useEffect
   };
 
   const bgClass = theme === "dark" ? "bg-[#1E201E]" : "bg-white";
@@ -134,46 +111,40 @@ function App() {
             </p>
           </div>
 
-        {/* Date inputs */}
-        <div className="flex flex-row gap-2 sm:gap-4 mb-4 sm:mb-6">
-          <div className="flex-1">
-            <label htmlFor="fromDate" className={`block text-xs font-medium mb-1 ${textSecondaryClass}`}>
-              Från
-            </label>
-            <input
-              id="fromDate"
-              type="date"
-              value={fromDate}
-              onChange={(e) => {
-                // Only update if a valid date string is provided
-                const value = e.target.value;
-                if (value === "" || value.match(/^\d{4}-\d{2}-\d{2}$/)) {
-                  setFromDate(value);
-                }
-              }}
-              onBlur={performCalculation}
-              className={`w-full px-2 sm:px-4 py-1.5 sm:py-2.5 text-xs sm:text-base ${inputBgClass} border ${inputBorderClass} rounded-lg ${inputTextClass} focus:outline-none focus:ring-2 ${focusRingClass} focus:border-transparent min-h-[36px] sm:min-h-[44px]`}
-            />
+        {/* Date inputs and calculate button */}
+        <div className="flex flex-col sm:flex-row sm:items-end gap-2.5 sm:gap-4 mb-4 sm:mb-6">
+          <div className="flex flex-row gap-2 sm:gap-4 flex-1">
+            <div className="flex-1">
+              <label htmlFor="fromDate" className={`block text-xs font-medium mb-1 ${textSecondaryClass}`}>
+                Från
+              </label>
+              <input
+                id="fromDate"
+                type="date"
+                value={fromDate}
+                onChange={(e) => setFromDate(e.target.value)}
+                className={`w-full px-2 sm:px-4 py-1.5 sm:py-2.5 text-xs sm:text-base ${inputBgClass} border ${inputBorderClass} rounded-lg ${inputTextClass} focus:outline-none focus:ring-2 ${focusRingClass} focus:border-transparent min-h-[36px] sm:min-h-[44px]`}
+              />
+            </div>
+            <div className="flex-1">
+              <label htmlFor="toDate" className={`block text-xs font-medium mb-1 ${textSecondaryClass}`}>
+                Till
+              </label>
+              <input
+                id="toDate"
+                type="date"
+                value={toDate}
+                onChange={(e) => setToDate(e.target.value)}
+                className={`w-full px-2 sm:px-4 py-1.5 sm:py-2.5 text-xs sm:text-base ${inputBgClass} border ${inputBorderClass} rounded-lg ${inputTextClass} focus:outline-none focus:ring-2 ${focusRingClass} focus:border-transparent min-h-[36px] sm:min-h-[44px]`}
+              />
+            </div>
           </div>
-          <div className="flex-1">
-            <label htmlFor="toDate" className={`block text-xs font-medium mb-1 ${textSecondaryClass}`}>
-              Till
-            </label>
-            <input
-              id="toDate"
-              type="date"
-              value={toDate}
-              onChange={(e) => {
-                // Only update if a valid date string is provided
-                const value = e.target.value;
-                if (value === "" || value.match(/^\d{4}-\d{2}-\d{2}$/)) {
-                  setToDate(value);
-                }
-              }}
-              onBlur={performCalculation}
-              className={`w-full px-2 sm:px-4 py-1.5 sm:py-2.5 text-xs sm:text-base ${inputBgClass} border ${inputBorderClass} rounded-lg ${inputTextClass} focus:outline-none focus:ring-2 ${focusRingClass} focus:border-transparent min-h-[36px] sm:min-h-[44px]`}
-            />
-          </div>
+          <button
+            onClick={handleCalculate}
+            className={`w-full sm:w-auto px-5 sm:px-8 py-2.5 sm:py-2.5 ${seasonTheme.primaryColor} ${seasonTheme.primaryColorHover} text-white font-semibold rounded-lg transition-colors duration-200 text-sm sm:text-base min-h-[40px] sm:min-h-[44px]`}
+          >
+            Beräkna
+          </button>
         </div>
 
         {/* Result display */}
