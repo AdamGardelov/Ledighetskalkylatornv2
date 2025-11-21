@@ -123,7 +123,7 @@ function App() {
                 type="date"
                 value={fromDate}
                 onChange={(e) => setFromDate(e.target.value)}
-                className={`w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base ${inputBgClass} border ${inputBorderClass} rounded-lg ${inputTextClass} focus:outline-none focus:ring-2 ${focusRingClass} focus:border-transparent min-h-[40px] sm:min-h-[44px]`}
+                className={`appearance-none w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base ${inputBgClass} border ${inputBorderClass} rounded-lg ${inputTextClass} focus:outline-none focus:ring-2 ${focusRingClass} focus:border-transparent min-h-[40px] sm:min-h-[44px]`}
               />
             </div>
             <div className="flex-1">
@@ -135,7 +135,7 @@ function App() {
                 type="date"
                 value={toDate}
                 onChange={(e) => setToDate(e.target.value)}
-                className={`w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base ${inputBgClass} border ${inputBorderClass} rounded-lg ${inputTextClass} focus:outline-none focus:ring-2 ${focusRingClass} focus:border-transparent min-h-[40px] sm:min-h-[44px]`}
+                className={`appearance-none w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base ${inputBgClass} border ${inputBorderClass} rounded-lg ${inputTextClass} focus:outline-none focus:ring-2 ${focusRingClass} focus:border-transparent min-h-[40px] sm:min-h-[44px]`}
               />
             </div>
           </div>
