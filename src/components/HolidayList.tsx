@@ -22,9 +22,6 @@ export default function HolidayList({ holidays, currentYear }: HolidayListProps)
 
   const bgClass = theme === "dark" ? "bg-[#3C3D37]" : "bg-gray-100";
   const textClass = theme === "dark" ? "text-[#ECDFCC]" : "text-gray-900";
-  const borderClass = theme === "dark" ? "border-[#697565]" : "border-gray-300";
-  const itemBgClass = theme === "dark" ? "bg-[#1E201E]" : "bg-white";
-  const itemHoverClass = theme === "dark" ? "hover:bg-[#3C3D37]" : "hover:bg-gray-50";
 
   return (
     <div className={`mt-3 sm:mt-8 ${bgClass} rounded-lg p-2.5 sm:p-4 border ${theme === "dark" ? "border-[#697565]" : "border-gray-300"}`}>
