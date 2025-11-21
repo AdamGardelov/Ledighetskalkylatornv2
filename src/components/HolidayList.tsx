@@ -27,15 +27,15 @@ export default function HolidayList({ holidays, currentYear }: HolidayListProps)
   const itemHoverClass = theme === "dark" ? "hover:bg-[#3C3D37]" : "hover:bg-gray-50";
 
   return (
-    <div className={`mt-8 ${bgClass} rounded-lg p-4 border ${theme === "dark" ? "border-[#697565]" : "border-gray-300"}`}>
+    <div className={`mt-6 sm:mt-8 ${bgClass} rounded-lg p-3 sm:p-4 border ${theme === "dark" ? "border-[#697565]" : "border-gray-300"}`}>
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className="w-full flex items-center justify-between text-left"
+        className="w-full flex items-center justify-between text-left gap-2"
       >
-        <h2 className={`text-lg font-semibold ${textClass}`}>
+        <h2 className={`text-base sm:text-lg font-semibold ${textClass} truncate`}>
           Röda dagar kvar {currentYear} ({upcomingHolidays.length}) 🥳
         </h2>
-        <span className={`${textClass} text-xl`}>
+        <span className={`${textClass} text-lg sm:text-xl flex-shrink-0`}>
           {isExpanded ? "−" : "+"}
         </span>
       </button>
@@ -47,13 +47,12 @@ export default function HolidayList({ holidays, currentYear }: HolidayListProps)
             return (
               <div
                 key={holiday.date}
-                className={`${itemBgClass} ${itemHoverClass} rounded-lg p-2 border ${borderClass} transition-colors`}
+                className={`${itemBgClass} ${itemHoverClass} rounded-lg p-3 sm:p-2 border ${borderClass} transition-colors`}
               >
-                <div className="flex items-center justify-between w-full">
-                  <span className={`font-medium ${textClass}`}>
-                    {format(holidayDate, "yyyy-MM-dd", { locale: sv })} - {holiday.name}
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between w-full gap-1 sm:gap-0">
+                  <span className={`font-medium ${textClass} text-sm sm:text-base break-words`}>
+                    <span className="text-xs sm:text-sm font-normal">{format(holidayDate, "yyyy-MM-dd", { locale: sv })}</span> - {holiday.name}
                   </span>
-                  <span className={textClass}>🎉</span>
                 </div>
               </div>
             );

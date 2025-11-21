@@ -39,23 +39,23 @@ export default function SearchHistory({ onSelectSearch, refreshTrigger }: Search
   const itemHoverClass = theme === "dark" ? "hover:bg-[#3C3D37]" : "hover:bg-gray-50";
 
   return (
-    <div className={`mt-6 ${bgClass} rounded-lg p-4 border ${borderClass}`}>
-      <div className="flex items-center justify-between mb-2">
+    <div className={`mt-4 sm:mt-6 ${bgClass} rounded-lg p-3 sm:p-4 border ${borderClass}`}>
+      <div className="flex items-center justify-between mb-2 gap-2">
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="flex-1 flex items-center justify-between text-left"
+          className="flex-1 flex items-center justify-between text-left min-w-0"
         >
-          <h2 className={`text-lg font-semibold ${textClass}`}>
+          <h2 className={`text-base sm:text-lg font-semibold ${textClass} truncate`}>
             Senaste sökningar ({history.length})
           </h2>
-          <span className={`${textClass} text-xl`}>
+          <span className={`${textClass} text-lg sm:text-xl flex-shrink-0 ml-2`}>
             {isExpanded ? "−" : "+"}
           </span>
         </button>
         {isExpanded && (
           <button
             onClick={handleClear}
-            className={`ml-4 text-sm ${theme === "dark" ? "text-[#ECDFCC]/60 hover:text-[#ECDFCC]" : "text-gray-500 hover:text-gray-700"} transition-colors`}
+            className={`ml-2 sm:ml-4 text-xs sm:text-sm ${theme === "dark" ? "text-[#ECDFCC]/60 hover:text-[#ECDFCC]" : "text-gray-500 hover:text-gray-700"} transition-colors flex-shrink-0`}
           >
             Rensa
           </button>
@@ -75,16 +75,16 @@ export default function SearchHistory({ onSelectSearch, refreshTrigger }: Search
                 onClick={() => handleSelect(item)}
                 className={`w-full ${itemBgClass} ${itemHoverClass} rounded-lg p-3 border ${borderClass} transition-colors text-left`}
               >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className={`font-medium ${textClass}`}>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
+                  <div className="flex-1 min-w-0">
+                    <div className={`font-medium ${textClass} text-sm sm:text-base break-words`}>
                       {format(fromDate, "d MMM", { locale: sv })} - {format(toDate, "d MMM yyyy", { locale: sv })}
                     </div>
                     <div className={`text-xs mt-1 ${theme === "dark" ? "text-[#ECDFCC]/60" : "text-gray-500"}`}>
                       {daysDiff} dagar
                     </div>
                   </div>
-                  <div className={`text-xs ${theme === "dark" ? "text-[#ECDFCC]/40" : "text-gray-400"}`}>
+                  <div className={`text-xs ${theme === "dark" ? "text-[#ECDFCC]/40" : "text-gray-400"} sm:ml-4 flex-shrink-0`}>
                     {format(new Date(item.timestamp), "d MMM", { locale: sv })}
                   </div>
                 </div>
