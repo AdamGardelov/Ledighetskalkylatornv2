@@ -64,7 +64,7 @@ export default function SearchHistory({ onSelectSearch, refreshTrigger }: Search
 
       {isExpanded && (
         <div className="mt-4 space-y-2">
-          {history.map((item, index) => {
+          {history.map((item) => {
             const fromDate = new Date(item.fromDate);
             const toDate = new Date(item.toDate);
             const daysDiff = Math.ceil((toDate.getTime() - fromDate.getTime()) / (1000 * 60 * 60 * 24)) + 1;
