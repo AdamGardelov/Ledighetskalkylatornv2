@@ -8,7 +8,7 @@ import CookieConsent from "@/components/CookieConsent";
 import { getSwedishHolidays } from "@/lib/holidays";
 import { useTheme } from "@/contexts/ThemeContext";
 import { getCurrentSeason, getSeasonTheme } from "@/lib/seasons";
-import { getCookie, setCookie, hasConsentedToCookies } from "@/lib/cookies";
+import { setCookie, hasConsentedToCookies } from "@/lib/cookies";
 import { addToSearchHistory } from "@/lib/searchHistory";
 
 function App() {
